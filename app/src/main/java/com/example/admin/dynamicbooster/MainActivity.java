@@ -10,6 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -21,6 +22,7 @@ public class MainActivity extends AppCompatActivity implements TextToSpeech.OnIn
     private final int CODE_SPEECH_OUTPUT = 143;
     private ConstraintLayout constraintLayout;
     private TextToSpeech tts;
+    Button admin,user,register;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +31,9 @@ public class MainActivity extends AppCompatActivity implements TextToSpeech.OnIn
         constraintLayout = (ConstraintLayout) findViewById(R.id.activity_main);
         tts = new TextToSpeech(this, this);
         showVoiceText = (TextView)findViewById(R.id.showV);
+        admin =(Button)findViewById(R.id.admin);
+        user=(Button)findViewById(R.id.user);
+        register=(Button)findViewById(R.id.register);
 
         constraintLayout.setOnTouchListener(new View.OnTouchListener() {
             @Override
@@ -37,8 +42,29 @@ public class MainActivity extends AppCompatActivity implements TextToSpeech.OnIn
                 return false;
             }
         });
+admin.setOnClickListener(new View.OnClickListener() {
+    @Override
+    public void onClick(View v) {
+       Intent intent1 = new Intent(MainActivity.this,AdminActivity.class);
+       startActivity(intent1);
+    }
+});
+user.setOnClickListener(new View.OnClickListener() {
+    @Override
+    public void onClick(View v) {
 
+        Intent intent2 =new Intent(MainActivity.this,user.class);
+        startActivity(intent2);
 
+    }
+});
+register.setOnClickListener(new View.OnClickListener() {
+    @Override
+    public void onClick(View v) {
+Intent intent3 = new Intent(MainActivity.this,Register.class);
+startActivity(intent3);
+    }
+});
     }
 
     private void btnToOpenMic() {
@@ -69,16 +95,15 @@ public class MainActivity extends AppCompatActivity implements TextToSpeech.OnIn
 
         }
         String check = showVoiceText.getText().toString();
-        if (check.equals("1"))
+        if (check.equals("user"))
         {
-            Toast.makeText(getApplicationContext(), "Successfully logged in",
-                    Toast.LENGTH_SHORT).show();
-            speakOut();
+Intent intent1 = new Intent(MainActivity.this,user.class);
+startActivity(intent1);
         }
-        else if (check.equals("2"))
+        else if (check.equals("admin"))
         {
-
-
+Intent intent2 = new Intent(MainActivity.this,AdminActivity.class);
+startActivity(intent2);
         }
         else{
             Toast.makeText(getApplicationContext(), "Sorry",
@@ -127,13 +152,14 @@ public class MainActivity extends AppCompatActivity implements TextToSpeech.OnIn
     //text to speech wrong pw
     private void reject()
     {
-
-        String mistake = "Oops , Sorry Please try again...Are u  User or Admin ? Please Enter 1 for User or 2 for Admin";
+        tts.setSpeechRate(0.9f);
+        String mistake = "Oops , Sorry Please try again...Are u  User or Admin ? Please say user if u r User or Admin for Admin";
         tts.speak(mistake,TextToSpeech.QUEUE_FLUSH,null);
     }
     private void initialCall()
     {
-        String msg = "Hello, Are u  User or Admin ? Please Enter 1 for User or 2 for Admin" ;
+        String msg = "Hello, Are u  User or Admin ? Please say user if u r User or Admin for Admin" ;
+        tts.setSpeechRate(0.9f);
         tts.speak(msg,TextToSpeech.QUEUE_FLUSH,null);
 
     }
