@@ -1,12 +1,12 @@
 package com.example.admin.dynamicbooster;
 
-import android.app.Activity;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.os.Bundle;
 import android.speech.RecognizerIntent;
 import android.speech.tts.TextToSpeech;
 import android.support.constraint.ConstraintLayout;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
@@ -18,65 +18,64 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.Locale;
 
-public class user extends Activity implements TextToSpeech.OnInitListener {
-TextView input1;
-EditText input;
-
+public class UserPassword extends AppCompatActivity implements TextToSpeech.OnInitListener  {
+    TextView userPin,textInput;
+    EditText pin;
     private final  int CODE_SPEECH_OUTPUT2=143;
     private ConstraintLayout constraintLayout2;
     private TextToSpeech tts2;
     Button bt;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_user);
-  input1 = (TextView) findViewById(R.id.textEntered);
-  input = (EditText)findViewById(R.id.input);
-bt=(Button)findViewById(R.id.submit);
+        setContentView(R.layout.activity_user_password);
+        userPin = (TextView) findViewById(R.id.p1);
+        pin = (EditText) findViewById(R.id.p2);
+        bt = (Button) findViewById(R.id.bt5);
 
-  constraintLayout2 = (ConstraintLayout)findViewById(R.id.con2);
-tts2 =new TextToSpeech(this,this);
-constraintLayout2.setOnTouchListener(new View.OnTouchListener() {
-    @Override
-    public boolean onTouch(View v, MotionEvent event) {
-        btnToOpenMic();
-        return false;
-    }
-});
-bt.setOnClickListener(new View.OnClickListener() {
-    @Override
-    public void onClick(View v) {
-        String phone = input.getText().toString();
-        int ph2 = Integer.parseInt(phone);
-        if(ph2 == 1234567890)
-        {
-            Intent intent = new Intent(user.this,UserPassword.class);
-            startActivity(intent);
-        }
-        else
-        {
-            Toast.makeText(user.this,
-                    "Sorry Please Try again", Toast.LENGTH_LONG).show();
-        }
-    }
-});
+        constraintLayout2 = (ConstraintLayout) findViewById(R.id.userPw);
+        tts2 = new TextToSpeech(this, this);
+
+        tts2 = new TextToSpeech(this, this);
+        constraintLayout2.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                btnToOpenMic();
+                return false;
+            }
+        });
+        bt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String pin2 = pin.getText().toString();
+                int finalpin = Integer.parseInt(pin2);
+                if(finalpin == 1234)
+                {
+                    Intent intent = new Intent(UserPassword.this,User2.class);
+                    startActivity(intent);
+                }
+                else
+                {
+                    Toast.makeText(UserPassword.this,
+                            "Sorry Please Try again", Toast.LENGTH_LONG).show();
+                }
+            }
+        });
 
     }
-    private void btnToOpenMic()
-    {
+    private void btnToOpenMic() {
         Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
-        intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL,RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
+        intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
         intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, Locale.getDefault());
-        intent.putExtra(RecognizerIntent.EXTRA_PROMPT,"Speek now......");
-        try{
-            startActivityForResult(intent,CODE_SPEECH_OUTPUT2);
-        }
-        catch (ActivityNotFoundException e)
-        {
+        intent.putExtra(RecognizerIntent.EXTRA_PROMPT, "Speek now......");
+        try {
+            startActivityForResult(intent, CODE_SPEECH_OUTPUT2);
+        } catch (ActivityNotFoundException e) {
 
 
         }
-
     }
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -85,19 +84,19 @@ bt.setOnClickListener(new View.OnClickListener() {
             case CODE_SPEECH_OUTPUT2:{
                 if(resultCode == RESULT_OK && null!= data){
                     ArrayList<String> voiceInText = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
-                    input1.setText(voiceInText.get(0));
+                    textInput.setText(voiceInText.get(0));
                 }
                 break;
             }
 
         }
 
-        String check = input1.getText().toString();
+        String check = textInput.getText().toString();
         int num = Integer.parseInt(check);
-        if (num==1234567890)
+        if (num==1234)
         {
-           Intent intent3 = new Intent(user.this,UserPassword.class);
-           startActivity(intent3);
+            Intent intent3 = new Intent(UserPassword.this,User2.class);
+            startActivity(intent3);
         }
 
         else{
@@ -107,7 +106,6 @@ bt.setOnClickListener(new View.OnClickListener() {
 
         }
     }
-
     @Override
     protected void onDestroy() {
         if (tts2 != null) {
@@ -116,6 +114,7 @@ bt.setOnClickListener(new View.OnClickListener() {
         }
         super.onDestroy();
     }
+
     @Override
     public void onInit(int status) {
         if (status == TextToSpeech.SUCCESS) {
@@ -129,7 +128,6 @@ bt.setOnClickListener(new View.OnClickListener() {
                 // btnSpeak.setEnabled(true);
                 initialCall();
 
-
             }
 
         } else {
@@ -137,18 +135,15 @@ bt.setOnClickListener(new View.OnClickListener() {
         }
 
     }
-
-
-    //text to speech wrong pw
     private void reject()
     {
 
-        String mistake = "Oops , Sorry Please try again Please enter your phone number";
+        String mistake = "Oops , Sorry Please try again Please enter your pin number";
         tts2.speak(mistake,TextToSpeech.QUEUE_FLUSH,null);
     }
     private void initialCall()
     {
-        String msg = "Please Enter your Phone Number" ;
+        String msg = "Please Enter your Pin Number" ;
         tts2.speak(msg,TextToSpeech.QUEUE_FLUSH,null);
 
     }

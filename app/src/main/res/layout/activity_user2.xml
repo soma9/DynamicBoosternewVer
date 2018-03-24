@@ -6,4 +6,79 @@
     android:layout_height="match_parent"
     tools:context="com.example.admin.dynamicbooster.User2">
 
+
+    <Button
+        android:id="@+id/bt1"
+        android:layout_width="135dp"
+        android:layout_height="153dp"
+
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="16dp"
+        android:text="@string/tutorials"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/bt2"
+        android:layout_width="133dp"
+        android:layout_height="148dp"
+        android:layout_marginLeft="176dp"
+        android:layout_marginTop="20dp"
+        android:text="@string/Career"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/bt3"
+        android:layout_width="135dp"
+        android:layout_height="155dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="176dp"
+        android:text="@string/mentor"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/bt4"
+        android:layout_width="141dp"
+        android:layout_height="154dp"
+
+        android:layout_alignParentEnd="true"
+        android:layout_marginLeft="176dp"
+        android:layout_marginTop="176dp"
+        android:text="@string/ResumeBuilder"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="0dp"
+        tools:ignore="MissingConstraints">
+
+        <LinearLayout
+            android:id="@+id/linearLayout"
+            android:layout_width="500dp"
+            android:layout_height="150dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="350dp"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <com.example.admin.dynamicbooster.GifImageView
+                android:id="@+id/GifImageView"
+                android:layout_width="500dp"
+                android:layout_height="150dp"
+
+                android:text="hello" />
+        </LinearLayout>
+
+    </RelativeLayout>
+
 </android.support.constraint.ConstraintLayout>

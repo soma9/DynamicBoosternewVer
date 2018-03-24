@@ -6,11 +6,36 @@
     android:layout_height="match_parent"
     tools:context="com.example.admin.dynamicbooster.AdminActivity">
 
-    <Button
-        android:id="@+id/bt1"
+
+    <TextView
+        android:id="@+id/adminid"
+        android:layout_width="214dp"
+        android:layout_height="42dp"
+        android:layout_marginLeft="64dp"
+        android:layout_marginTop="108dp"
+        android:text="@string/Admin"
+        android:textAppearance="@color/colorPrimary"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/adminpw"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="click Me"/>
+        android:layout_marginLeft="64dp"
+        android:layout_marginTop="200dp"
+        android:ems="10"
+        android:inputType="textPassword"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-
+    <Button
+        android:id="@+id/button"
+        android:layout_width="140dp"
+        android:layout_height="40dp"
+        android:layout_marginLeft="64dp"
+        android:layout_marginTop="260dp"
+        android:text="@string/submit"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 </android.support.constraint.ConstraintLayout>
